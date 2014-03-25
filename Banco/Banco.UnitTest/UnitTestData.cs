@@ -16,7 +16,6 @@ namespace Banco.UnitTest
             cartaoBusiness = new CartaoBusiness();
         }
 
-
         [TestMethod]
         public void TestInserirCartao()
         {
@@ -26,6 +25,7 @@ namespace Banco.UnitTest
             Assert.IsTrue(cartao.Id > 0);
 
         }
+
         [TestMethod]
         public void InserirConta()
         {
@@ -37,7 +37,6 @@ namespace Banco.UnitTest
         }
 
         [TestMethod]
-
         public void InserirCliente()
         {
             ClienteBusiness clienteBusiness = new ClienteBusiness();
