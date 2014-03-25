@@ -40,8 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CartaoBusiness.cs" />
+    <Compile Include="ClienteBusiness.cs" />
     <Compile Include="ContaBusiness.cs" />
     <Compile Include="Exceptions\CartaoInvalidoException.cs" />
+    <Compile Include="Interfaces\IBusiness.cs" />
     <Compile Include="MaquinaBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

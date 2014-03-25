@@ -12,50 +12,54 @@ namespace Banco.UnitTest
         [TestMethod]
         public void TestarSaqueSaldoSuficiente()
         {
-            Cartao cartao = new Cartao();
-            cartao.Cliente = new Cliente();
-            cartao.Conta = new Conta();
-            cartao.Conta.Saldo = 200.0M;
-            cartao.Validade = DateTime.Now.AddYears(3);
+            Cliente cliente = new Cliente();
+
+            cliente.Cartao = new Cartao();
+            cliente.Conta= new Conta();
+            cliente.Conta.Saldo = 200.0M;
+            cliente.Cartao.Validade = DateTime.Now.AddYears(3);
+
             Maquina maquina = new Maquina();
             maquina.Saldo = decimal.MaxValue;
 
             MaquinaBusiness business = new MaquinaBusiness();
-            business.Sacar(maquina, cartao, 10.0M);
+            business.Sacar(maquina, cliente, 10.0M);
 
-            Assert.AreEqual(190.0M, cartao.Conta.Saldo);
+            Assert.AreEqual(190.0M, cliente.Conta.Saldo);
         }
 
         [TestMethod]
         public void TestarSaldoInsuficiente()
         {
-            Cartao cartao = new Cartao();
-            cartao.Cliente = new Cliente();
-            cartao.Conta = new Conta();
-            cartao.Conta.Saldo = 200.0M;
+            Cliente cliente = new Cliente();
+
+            cliente.Cartao = new Cartao();
+            cliente.Conta = new Conta();
+            cliente.Conta.Saldo = 200.0M;
 
             Maquina maquina = new Maquina();
             maquina.Saldo = decimal.MaxValue;
 
             MaquinaBusiness business = new MaquinaBusiness();
-            business.Sacar(maquina, cartao, 300.0M);
+            business.Sacar(maquina, cliente, 300.0M);
 
-            Assert.AreEqual(200.0M, cartao.Conta.Saldo);
+            Assert.AreEqual(200.0M, cliente.Conta.Saldo);
         }
 
         [TestMethod]
         public void TestarSaldoMaquinaSuficiente()
         {
-            Cartao cartao = new Cartao();
-            cartao.Cliente = new Cliente();
-            cartao.Conta = new Conta();
-            cartao.Conta.Saldo = 500.0M;
-            cartao.Validade = DateTime.Now.AddYears(3);
+            Cliente cliente = new Cliente();
+
+            cliente.Cartao = new Cartao();
+            cliente.Conta= new Conta();
+            cliente.Conta.Saldo = 500.0M;
+            cliente.Cartao.Validade = DateTime.Now.AddYears(3);
 
             Maquina maquina = new Maquina();
             maquina.Saldo = 250.0M;
             MaquinaBusiness business = new MaquinaBusiness();
-            business.Sacar(maquina, cartao, 150.0M);
+            business.Sacar(maquina, cliente, 150.0M);
 
             Assert.AreEqual(100.0M, maquina.Saldo);
         }
@@ -63,15 +67,16 @@ namespace Banco.UnitTest
         [TestMethod]
         public void TestarSaldoMaquinaInsuficiente()
         {
-            Cartao cartao = new Cartao();
-            cartao.Cliente = new Cliente();
-            cartao.Conta = new Conta();
-            cartao.Conta.Saldo = 500.0M;
+            Cliente cliente = new Cliente();
+
+            cliente.Cartao = new Cartao();
+            cliente.Conta= new Conta();
+            cliente.Conta.Saldo = 500.0M;
 
             Maquina maquina = new Maquina();
             maquina.Saldo = 100.0M;
             MaquinaBusiness business = new MaquinaBusiness();
-            business.Sacar(maquina,cartao,200.0M);
+            business.Sacar(maquina,cliente,200.0M);
 
             Assert.AreEqual(100.0M, maquina.Saldo);
 
@@ -80,36 +85,38 @@ namespace Banco.UnitTest
         [TestMethod]
         public void TestarCartaoValido()
         {
-            Cartao cartao = new Cartao();
-            cartao.Validade = DateTime.Now.AddYears(3);
-            cartao.Cliente = new Cliente();
-            cartao.Conta = new Conta();
-            cartao.Conta.Saldo = 500.0M;
+            Cliente cliente = new Cliente();
+
+            cliente.Cartao = new Cartao();
+            cliente.Cartao.Validade = DateTime.Now.AddYears(3);
+            cliente.Conta = new Conta();
+            cliente.Conta.Saldo = 500.0M;
 
             Maquina maquina = new Maquina();
             maquina.Saldo = 200.0M;
             MaquinaBusiness business = new MaquinaBusiness();
-            business.Sacar(maquina, cartao, 500.0M);
+            business.Sacar(maquina, cliente, 500.0M);
 
-            Assert.AreEqual(500.0M, cartao.Conta.Saldo);
+            Assert.AreEqual(500.0M, cliente.Conta.Saldo);
         }
 
         [TestMethod]
         [ExpectedException(typeof(CartaoInvalidoException))]
         public void TestarCartaoInvalido()
         {
-            Cartao cartao = new Cartao();
-            cartao.Validade = DateTime.Now.AddYears(-1);
-            cartao.Cliente = new Cliente();
-            cartao.Conta = new Conta();
-            cartao.Conta.Saldo = 500.0M;
+            Cliente cliente = new Cliente();
+
+            cliente.Cartao = new Cartao();
+            cliente.Cartao.Validade = DateTime.Now.AddYears(-1);
+            cliente.Conta = new Conta();
+            cliente.Conta.Saldo = 500.0M;
 
             Maquina maquina = new Maquina();
             maquina.Saldo = 700.0M;
             MaquinaBusiness busines = new MaquinaBusiness();
-            busines.Sacar(maquina, cartao, 500.0M);
+            busines.Sacar(maquina, cliente, 500.0M);
 
-            Assert.AreEqual(500.0M, cartao.Conta.Saldo);
+            Assert.AreEqual(500.0M, cliente.Conta.Saldo);
         }
     }
 }

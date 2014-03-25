@@ -9,16 +9,16 @@ namespace Banco.Business
 {
     public class MaquinaBusiness
     {
-        public void Sacar(Maquina maquina, Cartao cartao, decimal valor)
+        public void Sacar(Maquina maquina, Cliente cliente, decimal valor)
         {
             ContaBusiness contaBusiness = new ContaBusiness();
             CartaoBusiness cartaoBusiness = new CartaoBusiness();
 
-            if (contaBusiness.VerificarSaldo(cartao.Conta, valor) 
+            if (contaBusiness.VerificarSaldo(cliente.Conta, valor) 
                 && VerificarSaldo(maquina,valor)
-                && cartaoBusiness.VerificarValidade(cartao))
+                && cartaoBusiness.VerificarValidade(cliente.Cartao))
             {
-                contaBusiness.Debitar(cartao.Conta, valor);
+                contaBusiness.Debitar(cliente.Conta, valor);
                 Debitar(maquina, valor);
             }
         }
@@ -31,7 +31,6 @@ namespace Banco.Business
         bool VerificarSaldo(Maquina maquina, decimal valor)
         {
             return maquina.Saldo >= valor;
-
         }
     }
 }

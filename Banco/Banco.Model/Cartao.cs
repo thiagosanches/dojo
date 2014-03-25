@@ -8,8 +8,7 @@ namespace Banco.Model
 {
     public class Cartao
     {
-        public Cliente Cliente { get; set; }
-        public Conta Conta { get; set; }
         public DateTime  Validade { get; set; }
+        public int Id { get; set; }
     }
 }

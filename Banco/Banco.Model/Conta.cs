@@ -9,5 +9,6 @@ namespace Banco.Model
     public class Conta
     {
         public decimal Saldo { get; set; }
+        public int Id { get; set; }
     }
 }
