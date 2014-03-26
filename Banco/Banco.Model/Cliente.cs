@@ -20,4 +20,10 @@ namespace Banco.Model
         public Conta Conta { get; set; }
         public Cartao Cartao { get; set; }
     }
+
+    public class ClienteDataHolder : Cliente
+    {
+        public DateTime ValidadeCartao { get; set; }
+        public decimal SaldoConta { get; set; }
+    }
 }

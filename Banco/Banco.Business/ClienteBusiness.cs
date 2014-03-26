@@ -29,7 +29,35 @@ namespace Banco.Business
 
         public Cliente Buscar(Cliente obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                ClienteData clienteData = new ClienteData();
+                Cliente cliente = clienteData.Buscar(obj);
+
+                ContaData contaData = new ContaData();
+                Conta conta = new Conta();
+                conta.Id = cliente.IdConta;
+
+                cliente.Conta = contaData.Buscar(conta);
+
+                CartaoData cartaoData = new CartaoData();
+                Cartao cartao = new Cartao();
+                cartao.Id = cliente.IdCartao;
+
+                cliente.Cartao = cartaoData.Buscar(cartao);
+
+                return cliente;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<ClienteDataHolder> BuscarTodos()
+        {
+            ClienteData data = new ClienteData();
+            return data.BuscarTodos();
         }
     }
 }

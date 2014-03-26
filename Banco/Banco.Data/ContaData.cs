@@ -3,6 +3,7 @@ using Banco.Model;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
@@ -38,7 +39,28 @@ namespace Banco.Data
 
         public Conta Buscar(Conta obj)
         {
-            throw new NotImplementedException();
+            Conta conta = null;
+
+            Database db = new DatabaseProviderFactory().Create("Database");
+
+            string sql = "SELECT ID, SALDO FROM CONTA WHERE ID = @ID";
+
+            using (DbCommand cmd = db.GetSqlStringCommand(sql))
+            {
+                db.AddInParameter(cmd, "ID", System.Data.DbType.Int32, obj.Id);
+
+                using (IDataReader dr = db.ExecuteReader(cmd))
+                {
+                    if (dr.Read())
+                    {
+                        conta = new Conta();
+                        conta.Id = Convert.ToInt32(dr["ID"]);
+                        conta.Saldo = Convert.ToDecimal(dr["SALDO"]);
+                    }
+                }
+            }
+
+            return conta;
         }
     }
 }
