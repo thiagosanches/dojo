@@ -1,0 +1,35 @@
+﻿@model AutoInsurance.Web.Models.ProposalViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Insured</h2>
+
+@using (Html.BeginForm("Index", "Car"))
+{
+    @Html.LabelFor(i => i.FirstName, "First Name:")
+    @Html.TextBoxFor(i => i.FirstName)
+
+    @Html.LabelFor(i => i.LastName, "Last Name:")
+    @Html.TextBoxFor(i => i.LastName)
+
+    @Html.LabelFor(i => i.Age, "Age:")
+    @Html.TextBoxFor(i => i.Age)
+
+    @Html.LabelFor(i =>i.Rg, "RG:")
+    @Html.TextBoxFor(i =>i.Rg)
+
+    @Html.LabelFor(i =>i.Gender, "Gender")
+    @Html.TextBoxFor(i =>i.Gender)
+
+    <br /><button class="btn">Next</button>
+    
+
+    
+
+    
+}
+
+

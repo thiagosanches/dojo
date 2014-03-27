@@ -1,0 +1,40 @@
+﻿@model List<AutoInsurance.Model.Proposal>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Proposals</h2>
+@using(Html.BeginForm("Search","Proposal"))
+{
+<input type="text" name="search" /><br />
+<button class="btn">Search</button>
+}
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Car Model</th>
+        <th>Photo</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Insured.FirstName
+            </td>
+            <td>
+                @item.Insured.Age
+            </td>
+            <td>
+                @item.Car.Model
+            </td>
+            <td>
+                @item.Car.Photo
+            </td>
+            <td></td>
+        </tr>
+    }
+</table>

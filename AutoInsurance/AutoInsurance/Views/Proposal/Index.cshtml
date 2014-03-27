@@ -1,0 +1,20 @@
+﻿@model AutoInsurance.Web.Models.ProposalViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Proposal Review</h2>
+
+@using(Html.BeginForm("",""))
+{
+    <h3>@Model.FirstName @Model.LastName</h3>
+    <br />
+
+    <p>Proposal Value: </p>
+    <h3>@Model.Value.ToString("C3")</h3>
+    <br />
+
+    <button class="btn">Save</button>
+}
