@@ -13,7 +13,21 @@ namespace AutoInsurance.Business
         public bool Save(Proposal obj)
         {
             ProposalRepository repository = new ProposalRepository();
-            return repository.Save(obj);
+            try
+            {
+                InsuredBusiness iBusiness = new InsuredBusiness();
+                iBusiness.Save(obj.Insured);
+
+                CarBusiness cBusiness = new CarBusiness();
+                obj.Car = cBusiness.FindAll().Find(i => i.Id == obj.Car.Id);
+                return repository.Save(obj);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public List<Proposal> FindAll()

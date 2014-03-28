@@ -7,9 +7,14 @@
 
 <h2>Proposal Review</h2>
 
-@using(Html.BeginForm("",""))
+@using(Html.BeginForm("Save","Proposal"))
 {
-    <h3>@Model.FirstName @Model.LastName</h3>
+   
+     @Html.HiddenFor(i => i.FirstName)
+    @Html.HiddenFor(i => i.LastName)
+    @Html.HiddenFor(i => i.Age) 
+    @Html.HiddenFor(i => i.CarId)    
+        <h3>@Model.FirstName @Model.LastName</h3>
     <br />
 
     <p>Proposal Value: </p>

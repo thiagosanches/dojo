@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoInsurance.Model;
+using System.Data.Entity;
 
 namespace AutoInsurance.Data
 {
@@ -11,13 +12,26 @@ namespace AutoInsurance.Data
     {
         public bool Save(Car obj)
         {
+            try
+            {
+
+                Db db = new Db();
+                db.Car.Add(obj);
+                db.SaveChanges();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             return true;
         }
 
         public List<Car> FindAll()
         {
-            List<Car> listaCar = new List<Car>();
-            Car gol = new Car();
+            /*Car gol = new Car();
             gol.Id = 1;
             gol.Manufacturer = "Volkswagen";
             gol.Model = "quadrado";
@@ -41,12 +55,16 @@ namespace AutoInsurance.Data
             bmw.Photo = "http://memimage.cardomain.com/ride_images/3/3019/141/32545070001_large.jpg";
             bmw.Year = 1994;
 
-            listaCar.Add(bmw);
-
-
-
-            return listaCar;
-
+            listaCar.Add(bmw);*/
+            try
+            {
+                Db db = new Db();
+                return db.Car.Where(i => i.Id > 0).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Car FindById(int Id)

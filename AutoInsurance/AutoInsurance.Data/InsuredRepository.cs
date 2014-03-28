@@ -11,12 +11,33 @@ namespace AutoInsurance.Data
     {
         public bool Save(Insured obj)
         {
-            return true;
+            try
+            {
+                Db db = new Db();
+                db.Insured.Add(obj);
+                db.SaveChanges();
+                return true;
+            } 
+            catch (Exception)
+            {
+                
+                throw;
+            }
+           
         }
 
         public List<Insured> FindAll()
         {
-            return new List<Insured>();
+            try
+            {
+                Db db = new Db();
+                return db.Insured.Where(i => i.Id > 0).ToList();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public Insured FindById(int Id)

@@ -11,24 +11,34 @@ namespace AutoInsurance.Data
     {
         public bool Save(Proposal obj)
         {
-            return true;
+            try
+            {
+                Db db = new Db();
+                db.Entry(obj.Car).State = System.Data.EntityState.Unchanged ;
+                db.Entry(obj.Insured).State = System.Data.EntityState.Unchanged;
+                db.Proposal.Add(obj);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public List<Proposal> FindAll()
         {
-            
-            List<Proposal> proposal = new List<Proposal>();
-            Proposal proposalObj = new Proposal();
-            proposalObj.Id = 1;
-            proposalObj.Value = 4000;
-            proposalObj.Insured = new Insured();
-            proposalObj.Insured.FirstName = "Joao";
-            proposalObj.Car = new Car();
-            proposalObj.Car.Model = "Ferrari";
-            proposal.Add(proposalObj);
-
-            return proposal;
-
+            try
+            {
+                Db db = new Db();
+                return db.Proposal.Include("Car").Include("Insured").Where(i => i.Id > 0).ToList();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         public Proposal FindById(int Id)
