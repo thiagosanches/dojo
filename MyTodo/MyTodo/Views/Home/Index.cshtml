@@ -1,0 +1,49 @@
+﻿@model MyTodo.Models.TarefaViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    Tarefas
+</h2>
+@if(Model.Mensagens != null){
+foreach (var item in Model.Mensagens)
+{
+    @Html.Raw(item)
+}
+}
+@using (Html.BeginForm("Save" , "Home"))
+{
+    
+    @Html.LabelFor(i=> i.Titulo,"Título:")
+    @Html.TextBoxFor(i=> i.Titulo)
+
+    @Html.LabelFor(i=> i.Data,"Data:")
+    @Html.TextBoxFor(i=> i.Data)
+
+    <br/><button class="btn">Salvar</button>
+    
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Titulo</th>
+            <th>Data</th>
+            <th>Status</th>
+        </tr>
+        @foreach (var item in Model.Tarefas)
+        {
+            <tr>
+                <td>@Html.ActionLink("Remover tarefa", 
+                "Delete", 
+                new { Id = @item.Id })
+                </td>
+                <td>@item.Titulo</td>
+                <td>@item.Data</td>
+            </tr>
+        }
+    </table>
+}
+
+
