@@ -1,0 +1,12 @@
+﻿@model Blog.Model.Post
+
+@{
+    ViewBag.Title = "ViewPost";
+}
+
+<h2>@Model.Title</h2>
+@Model.Text
+<br /><br />
+@Model.Date
+<br /><br />
+@Html.ActionLink("Back", "Index", null, new { @class="btn"})

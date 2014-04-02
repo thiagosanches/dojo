@@ -1,0 +1,32 @@
+﻿@model List<Blog.Model.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Blog</h2>
+@using (@Html.BeginForm("Search", "Home"))
+{
+    <input type="text" size="15" name="search" />
+    <br />
+    <button class="btn">Search</button>   
+}
+<div class="container">
+    @foreach (var item in Model)
+    { 
+        <hr />
+        <p class="lead">@item.Title</p>
+        <p>@item.Date</p>
+        <div class="panel-body">
+            @if (item.Text.Length > 300)
+            {
+                @item.Text.Substring(0, 300)
+            }
+            else
+            {
+                @item.Text
+            }
+        </div>
+        <div>@Html.ActionLink("Read more", "ViewPost", new { Id = @item.Id })</div>
+    }
+</div>

@@ -1,0 +1,22 @@
+﻿@model Blog.Model.Post
+
+@{
+    ViewBag.Title = "NewPost";
+}
+
+<h2>New Post</h2>
+
+
+<br />
+@using (Html.BeginForm("Save","Home"))
+{
+    @Html.LabelFor(i =>i.Title)
+    @Html.TextBoxFor(i =>i.Title)<br />
+
+    @Html.LabelFor(i =>i.Text)
+    @Html.TextAreaFor(i =>i.Text)<br />
+
+    <button class="btn">Post</button>
+    
+}
+

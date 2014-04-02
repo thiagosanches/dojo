@@ -1,0 +1,41 @@
+﻿@model List<Blog.Model.Post>
+
+@{
+    ViewBag.Title = "AdminArea";
+}
+
+<h2>Admin area</h2>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Text</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {  
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Title</td>
+            <td>
+                @if(item.Text.Length > 50)
+                {
+                    @item.Text.Substring(0,50)
+                }
+                else
+                {
+                    @item.Text
+                }
+            </td>
+            <td>@item.Date</td>
+            <td>
+                @Html.ActionLink("Edit", "EditPost", new { id = @item.Id }, new { @class = "btn" })
+                @Html.ActionLink("Delete", "DeletePost", new { id = @item.Id}, new { @class = "btn" })
+            </td>
+
+        </tr>
+    }
+
+</table>
